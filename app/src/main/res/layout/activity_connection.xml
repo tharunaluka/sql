@@ -1,120 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#EEEEEE">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:background="#ffffff"
+        android:layout_marginBottom="16dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:padding="5dp"
                 android:text="@string/new.connection.host"
-                android:id="@+id/textView" />
+                android:id="@+id/host" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
-                android:layout_weight="1" />
+                android:layout_weight="2"
+                android:id="@+id/editHost"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" >
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:padding="5dp"
                 android:text="@string/new.connection.port"
-                android:id="@+id/textView4" />
+                android:id="@+id/port" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText4"
-                android:layout_weight="1" />
+                android:layout_weight="2"
+                android:id="@+id/editPort"/>
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" >
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:padding="5dp"
                 android:text="@string/new.connection.user"
-                android:id="@+id/textView3" />
+                android:id="@+id/username" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3"
-                android:layout_weight="1" />
+                android:layout_weight="2"
+                android:id="@+id/editUsername"/>
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" >
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:padding="5dp"
                 android:text="@string/new.connection.pass"
-                android:id="@+id/textView5" />
+                android:id="@+id/password" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:layout_weight="2"
                 android:ems="10"
-                android:id="@+id/editText2" />
+                android:id="@+id/editPassword" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" >
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:padding="5dp"
                 android:text="@string/new.connection.name"
-                android:id="@+id/textView2" />
+                android:id="@+id/name" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:ems="10"
-                android:id="@+id/editText5"
-                android:password="false" />
+                android:id="@+id/editname"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new.connection.save"
-        android:id="@+id/button"
-        android:layout_gravity="center_horizontal" />
+        android:background="#ffffff"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="@string/new.connection.save"
+            android:id="@+id/saveConnection"
+            android:onClick="saveConnection"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="Quick Connect"
+            android:id="@+id/quickConnect"/>
+
+        </LinearLayout>
 
 </LinearLayout>

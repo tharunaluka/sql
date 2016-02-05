@@ -21,8 +21,7 @@ public class SplashActivity extends Activity {
 
         final Runnable splashScreenRunnable = new Runnable() {
             public void run() {
-                Intent i;
-                i = new Intent(SplashActivity.this, ConnectionActivity.class);
+                Intent i= new Intent(SplashActivity.this, ConnectionActivity.class);
                 startActivity(i);
                 finish();
             }
