@@ -6,4 +6,5 @@ package com.acetechapps.sql;
 public class Utils {
 
     public static final String PREFERENCES = "sql.editor.shared.preferences";
+    public static final String SAVED_CONNECTIONS = "has.saved.connections";
 }

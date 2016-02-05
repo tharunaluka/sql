@@ -2,7 +2,6 @@ package com.acetechapps.sql;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -23,7 +22,7 @@ public class SplashActivity extends Activity {
         final Runnable splashScreenRunnable = new Runnable() {
             public void run() {
                 Intent i;
-                i = new Intent(SplashActivity.this, NewConnectionActivity.class);
+                i = new Intent(SplashActivity.this, ConnectionActivity.class);
                 startActivity(i);
                 finish();
             }
