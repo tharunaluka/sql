@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">"SQL "</string>
+    <string name="new.connection.host">Host</string>
+    <string name="new.connection.port">Port</string>
+    <string name="new.connection.user">Username</string>
+    <string name="new.connection.pass">Password</string>
+    <string name="new.connection.name">Conneciton Name</string>
+    <string name="new.connection.save">Save Connection</string>
 </resources>
