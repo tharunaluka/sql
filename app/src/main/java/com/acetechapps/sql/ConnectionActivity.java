@@ -1,21 +1,25 @@
 package com.acetechapps.sql;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 /**
  * Created by bhargavsarvepalli on 05/02/16.
  */
-public class ConnectionActivity extends Activity {
+public class ConnectionActivity extends AppCompatActivity{
     EditText host;
     EditText port;
     EditText username;
     EditText password;
     EditText name;
+    EditText dbName;
     SharedPreferences preferences;
 
     @Override
@@ -33,6 +37,7 @@ public class ConnectionActivity extends Activity {
         username = (EditText) findViewById(R.id.editUsername);
         password = (EditText) findViewById(R.id.editPassword);
         name = (EditText) findViewById(R.id.editname);
+        dbName = (EditText) findViewById(R.id.editdbName);
     }
 
     public void saveConnection(View clicked) {
@@ -41,13 +46,39 @@ public class ConnectionActivity extends Activity {
         String portText = port.getText().toString();
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
+        String dbNameText = dbName.getText().toString();
         String nameText = name.getText().toString();
         SharedPreferences.Editor editor = preferences.edit();
         int connections = preferences.getInt("connections.no", 0);
         connections = connections + 1;
-        editor.putString("connection_" + connections, hostText + ","+ portText + "," + usernameText + "," + passwordText + "," + nameText);
+        editor.putString("connection_" + connections, hostText + ","+ portText + "," + usernameText + "," + passwordText + "," + dbNameText + "," + nameText);
         editor.commit();
 
         Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    public void quickConnect(View clicked) {
+        String hostText = host.getText().toString();
+        String portText = port.getText().toString();
+        String usernameText = username.getText().toString();
+        String passwordText = password.getText().toString();
+        String dbNameText = password.getText().toString();
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Cannot create connection", Toast.LENGTH_SHORT).show();
+        }
+
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://" + hostText + ":" + portText + "/" + dbNameText, usernameText, passwordText);
+        } catch (Exception f){
+            f.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
+        }
+        if(con!=null){
+            Toast.makeText(getApplicationContext(), "Connection SUCCESS, you can write queries now!", Toast.LENGTH_SHORT).show();
+        }
+        setContentView(R.layout.activity_main);
     }
 }

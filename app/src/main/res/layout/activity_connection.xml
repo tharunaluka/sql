@@ -34,6 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:text="192.168.1.101"
                 android:id="@+id/editHost"/>
 
         </LinearLayout>
@@ -56,6 +57,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:text="3306"
                 android:id="@+id/editPort"/>
         </LinearLayout>
 
@@ -77,6 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:text="root"
                 android:id="@+id/editUsername"/>
         </LinearLayout>
 
@@ -114,6 +117,30 @@
                 android:layout_weight="1"
                 android:textSize="20sp"
                 android:padding="5dp"
+                android:text="DB Name"
+                android:id="@+id/dbName" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ems="10"
+                android:text="mysql"
+                android:id="@+id/editdbName"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:padding="5dp"
                 android:text="@string/new.connection.name"
                 android:id="@+id/name" />
 
@@ -122,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
+                android:text="name"
                 android:id="@+id/editname"/>
 
         </LinearLayout>
@@ -150,6 +178,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:text="Quick Connect"
+            android:onClick="quickConnect"
             android:id="@+id/quickConnect"/>
 
         </LinearLayout>
