@@ -1,6 +1,7 @@
 package com.acetechapps.sql;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +15,8 @@ import java.sql.DriverManager;
  * Created by bhargavsarvepalli on 05/02/16.
  */
 public class ConnectionActivity extends AppCompatActivity{
+
+    Connection con = null;
     EditText host;
     EditText port;
     EditText username;
@@ -51,10 +54,10 @@ public class ConnectionActivity extends AppCompatActivity{
         SharedPreferences.Editor editor = preferences.edit();
         int connections = preferences.getInt("connections.no", 0);
         connections = connections + 1;
-        editor.putString("connection_" + connections, hostText + ","+ portText + "," + usernameText + "," + passwordText + "," + dbNameText + "," + nameText);
+        editor.putString("connection_" + connections, hostText + "," + portText + "," + usernameText + "," + passwordText + "," + dbNameText + "," + nameText);
         editor.commit();
 
-        Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
+
     }
 
     public void quickConnect(View clicked) {
@@ -63,22 +66,41 @@ public class ConnectionActivity extends AppCompatActivity{
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
         String dbNameText = password.getText().toString();
-        Connection con = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Cannot create connection", Toast.LENGTH_SHORT).show();
+        new ConnectAsyncTask().execute(hostText, portText,dbNameText, usernameText, passwordText );
+    }
+
+
+    private class ConnectAsyncTask extends AsyncTask<String, Integer, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                con = DriverManager.getConnection("jdbc:mysql://" + params[0] + ":" + params[1] + "/" + params[2], params[3], params[4]);
+            } catch (Exception f){
+                f.printStackTrace();
+            }
+            if(con!=null){
+                return true;
+            }
+            return false;
         }
 
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://" + hostText + ":" + portText + "/" + dbNameText, usernameText, passwordText);
-        } catch (Exception f){
-            f.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
+        protected void onPostExecute(Boolean result) {
+            if(result) {
+                Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Connection SUCCESS, you can write queries now!", Toast.LENGTH_SHORT).show();
+                setContentView(R.layout.activity_main);
+            } else{
+                Toast.makeText(getApplicationContext(), "Cannot create connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
+            }
         }
-        if(con!=null){
-            Toast.makeText(getApplicationContext(), "Connection SUCCESS, you can write queries now!", Toast.LENGTH_SHORT).show();
-        }
-        setContentView(R.layout.activity_main);
     }
+
 }
