@@ -1,5 +1,6 @@
 package com.acetechapps.sql;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,7 +71,7 @@ public class ConnectionActivity extends AppCompatActivity{
     }
 
 
-    private class ConnectAsyncTask extends AsyncTask<String, Integer, Boolean> {
+    public class ConnectAsyncTask extends AsyncTask<String, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(String... params) {
@@ -91,6 +92,7 @@ public class ConnectionActivity extends AppCompatActivity{
             return false;
         }
 
+
         protected void onPostExecute(Boolean result) {
             if(result) {
                 Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
@@ -102,5 +104,6 @@ public class ConnectionActivity extends AppCompatActivity{
             }
         }
     }
+
 
 }

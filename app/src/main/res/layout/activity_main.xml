@@ -21,8 +21,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/inPut"
-            android:onClick="inPut"/>
+            android:text="Start typing the Query..."
+            android:gravity="start"
+            android:id="@+id/inPut"/>
 
     </LinearLayout>
 
@@ -54,7 +55,7 @@
             android:layout_height="match_parent"
             android:text="Run"
             android:layout_margin="5dp"
-            android:onClick="run"/>
+            android:onClick="runQuery"/>
 
     </LinearLayout>
 

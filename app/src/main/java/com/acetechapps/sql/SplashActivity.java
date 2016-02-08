@@ -28,7 +28,7 @@ public class SplashActivity extends Activity {
         };
 
         Handler handler = new Handler();
-        handler.postDelayed(splashScreenRunnable, 1000);
+        handler.postDelayed(splashScreenRunnable, 1500);
     }
 
 }
