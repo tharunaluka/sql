@@ -12,9 +12,6 @@ import android.widget.Toast;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- * Created by bhargavsarvepalli on 05/02/16.
- */
 public class ConnectionActivity extends AppCompatActivity{
 
     Connection con = null;
