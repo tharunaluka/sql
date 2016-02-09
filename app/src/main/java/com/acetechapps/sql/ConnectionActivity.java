@@ -92,12 +92,10 @@ public class ConnectionActivity extends AppCompatActivity{
 
         protected void onPostExecute(Boolean result) {
             if(result) {
-                Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Connection SUCCESS, you can write queries now!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
                 startActivity(intent);
             } else{
-                Toast.makeText(getApplicationContext(), "Cannot create connection", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
             }
         }

@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     String getQuery;
     SharedPreferences preferences;
     Connection connection;
-    ResultSet resultSet;
     TextView textView;
 
     @Override
@@ -45,28 +44,24 @@ public class MainActivity extends AppCompatActivity {
     public void clear(View view) {
         getQuery = "Start Typing Query...";
         writtenQuery.setText(getQuery, TextView.BufferType.EDITABLE);
-        Toast.makeText(getApplicationContext(), "Cleared", Toast.LENGTH_SHORT).show();
     }
 
     public void runQuery(View clicked) {
         new RunQueryTask().execute(writtenQuery.getText().toString());
-        Toast.makeText(getApplicationContext(), "Will Run Eventually",Toast.LENGTH_SHORT).show();
     }
 
     public void setViewAndDisplayResult(ResultSet rs) throws Exception{
         setContentView(R.layout.activity_output);
-        String resultString = "";
+        String resultString = "Showing only the id of the result \n";
         textView = (TextView) findViewById(R.id.testOutput);
         while (rs.next()) {
-            resultString += rs.getString("id");
-            System.out.println(rs.getString("id") + "\n");
+            resultString += rs.getString(1) + "\n";
         }
         textView.setText(resultString);
     }
 
     public class RunQueryTask extends AsyncTask<String, Integer, Boolean> {
 
-        String resultString = "oh no!";
         ResultSet rs;
 
         @Override
@@ -94,8 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             } else{
-                Toast.makeText(getApplicationContext(), "Cannot create connection", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Query failed", Toast.LENGTH_SHORT).show();
             }
         }
     }
