@@ -1,5 +1,6 @@
 package com.acetechapps.sql;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -52,23 +53,30 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Will Run Eventually",Toast.LENGTH_SHORT).show();
     }
 
+    public void setViewAndDisplayResult(ResultSet rs) throws Exception{
+        setContentView(R.layout.activity_output);
+        String resultString = "";
+        textView = (TextView) findViewById(R.id.testOutput);
+        while (rs.next()) {
+            resultString += rs.getString("id");
+            System.out.println(rs.getString("id") + "\n");
+        }
+        textView.setText(resultString);
+    }
+
     public class RunQueryTask extends AsyncTask<String, Integer, Boolean> {
 
         String resultString = "oh no!";
+        ResultSet rs;
 
         @Override
         protected Boolean doInBackground(String... params) {
             try {
                 if (connection != null) {
                     Statement stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(params[0]);
-                    System.out.println("result " + resultSet);
-                    setContentView(R.layout.activity_output);
-                    textView = (TextView) findViewById(R.id.testOutput);
-                    while (rs.next()) {
-                        resultString += rs.getString(0);
-                        System.out.println(rs.getString(0) + "\n");
-                    }
+                    rs = stmt.executeQuery(params[0]);
+                    System.out.println("result " + rs);
+                    return true;
                 }
             } catch(Exception e){
                 e.printStackTrace();
@@ -79,7 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
         protected void onPostExecute(Boolean result) {
             if(result) {
-                textView.setText(resultString);
+                try {
+                    setViewAndDisplayResult(rs);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
             } else{
                 Toast.makeText(getApplicationContext(), "Cannot create connection", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();

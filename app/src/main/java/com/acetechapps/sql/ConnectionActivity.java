@@ -62,7 +62,7 @@ public class ConnectionActivity extends AppCompatActivity{
         String portText = port.getText().toString();
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
-        String dbNameText = password.getText().toString();
+        String dbNameText = dbName.getText().toString();
         new ConnectAsyncTask().execute(hostText, portText,dbNameText, usernameText, passwordText );
     }
 
@@ -76,13 +76,14 @@ public class ConnectionActivity extends AppCompatActivity{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Connection con = Utils.connection;
             try {
-                con = DriverManager.getConnection("jdbc:mysql://" + params[0] + ":" + params[1] + "/" + params[2], params[3], params[4]);
+                String url = "jdbc:mysql://" + params[0] + ":" + params[1] + "/" + params[2];
+                System.out.println(url);
+               Utils.connection = DriverManager.getConnection( url, params[3], params[4]);
             } catch (Exception f){
                 f.printStackTrace();
             }
-            if(con!=null){
+            if(Utils.connection!=null){
                 return true;
             }
             return false;
