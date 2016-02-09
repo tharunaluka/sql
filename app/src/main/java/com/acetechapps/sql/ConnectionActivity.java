@@ -14,7 +14,6 @@ import java.sql.DriverManager;
 
 public class ConnectionActivity extends AppCompatActivity{
 
-    Connection con = null;
     EditText host;
     EditText port;
     EditText username;
@@ -77,7 +76,7 @@ public class ConnectionActivity extends AppCompatActivity{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            Connection con = Utils.connection;
             try {
                 con = DriverManager.getConnection("jdbc:mysql://" + params[0] + ":" + params[1] + "/" + params[2], params[3], params[4]);
             } catch (Exception f){
@@ -94,7 +93,8 @@ public class ConnectionActivity extends AppCompatActivity{
             if(result) {
                 Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Connection SUCCESS, you can write queries now!", Toast.LENGTH_SHORT).show();
-                setContentView(R.layout.activity_main);
+                Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
+                startActivity(intent);
             } else{
                 Toast.makeText(getApplicationContext(), "Cannot create connection", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();

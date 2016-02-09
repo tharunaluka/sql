@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -16,11 +17,17 @@ public class MainActivity extends AppCompatActivity {
     EditText writtenQuery = (EditText) findViewById(R.id.inPut);
     String getQuery;
     SharedPreferences preferences;
+    Connection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(Utils.connection!=null){
+            connection = Utils.connection;
+        } else {
+            //start connect activity again!
+        }
     }
 
     public void save(View clicked) {
