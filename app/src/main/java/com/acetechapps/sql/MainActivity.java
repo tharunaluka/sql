@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         } else if (id == R.id.nav_tables) {
 
-        } else if (id == R.id.nav_connecitons) {
+        } else if (id == R.id.nav_conneciton) {
 
         } else if (id == R.id.nav_share) {
 
@@ -151,13 +151,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.left_menu, menu);
-        return true;
     }
 
     @Override

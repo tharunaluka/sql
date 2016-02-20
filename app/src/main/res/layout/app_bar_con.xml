@@ -10,16 +10,6 @@
         android:layout_height="56dp"
         android:gravity="center_vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:id="@+id/ic_drawer"
-            android:src="@drawable/ic_drawer"
-            android:onClick="openDrawer"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center">
 
-    <include android:id="@+id/appBar"  layout="@layout/app_bar"/>
+    <include android:id="@+id/appBarOutput"  layout="@layout/app_bar_output"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarOutput"
         android:id="@+id/testOutput" />
 
     <LinearLayout
@@ -18,9 +20,11 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
-        android:layout_height="410dp"
+        android:layout_height="match_parent"
         android:background="#ffffff"
-        android:layout_marginBottom="16dp">
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/appBarOutput">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -36,29 +40,14 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/export"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_export"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Back"
-            android:background="#D4E157"
-            android:layout_margin="5dp"
-            android:onClick="back"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Export"
-            android:background="#D4E157"
-            android:layout_margin="5dp"
-            android:onClick="export"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

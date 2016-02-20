@@ -16,14 +16,14 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:id="@+id/ic_drawer"
-            android:src="@drawable/ic_drawer"
-            android:onClick="openDrawer"/>
+            android:id="@+id/ic_back"
+            android:src="@drawable/ic_back"
+            android:onClick="goBack"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ic_drawer"
+            android:layout_toRightOf="@+id/ic_back"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="SQL"
