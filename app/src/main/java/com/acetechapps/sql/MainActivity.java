@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ActivityService {
     }
 
     @Override
-    public void openDrawer() {
+    public void openDrawer(View view) {
         Intent i= new Intent(this, LeftMenuActivity.class);
         startActivity(i);
     }

@@ -40,6 +40,7 @@ public class ConnectionActivity extends AppCompatActivity implements ActivitySer
         password = (EditText) findViewById(R.id.editPassword);
         name = (EditText) findViewById(R.id.editname);
         dbName = (EditText) findViewById(R.id.editdbName);
+
     }
 
     public void saveConnection(View clicked) {
@@ -106,7 +107,7 @@ public class ConnectionActivity extends AppCompatActivity implements ActivitySer
     }
 
     @Override
-    public void openDrawer() {
+    public void openDrawer(View view) {
         Intent i= new Intent(this, LeftMenuActivity.class);
         startActivity(i);
     }
