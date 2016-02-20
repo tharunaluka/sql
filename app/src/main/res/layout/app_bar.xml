@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#D4E157">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:id="@+id/ic_drawer"
+            android:src="@drawable/ic_drawer"
+            android:onClick=""/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/ic_drawer"
+            android:text="SQL"
+            android:textSize="24dp"
+            android:id="@+id/SQL"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_settings"
+            android:id="@+id/ic_settings"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>

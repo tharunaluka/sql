@@ -169,6 +169,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:text="@string/new.connection.save"
+            android:background="#D4E157"
             android:id="@+id/saveConnection"
             android:onClick="saveConnection"/>
 
@@ -178,6 +179,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:text="Quick Connect"
+            android:background="#D4E157"
             android:onClick="quickConnect"
             android:id="@+id/quickConnect"/>
 
