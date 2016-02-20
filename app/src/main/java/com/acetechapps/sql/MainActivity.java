@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,15 +25,21 @@ public class MainActivity extends AppCompatActivity {
     Connection connection;
     TextView textView;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.appBar);
+        setSupportActionBar(toolbar);
+
         if(Utils.connection!=null){
             connection = Utils.connection;
         } else {
             //start connect activity again!
-            Toast.makeText(getApplicationContext(), "Thats a bummer!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "That's a bummer!", Toast.LENGTH_SHORT).show();
         }
         writtenQuery = (EditText) findViewById(R.id.inPut);
     }
@@ -71,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     Statement stmt = connection.createStatement();
                     rs = stmt.executeQuery(params[0]);
                     System.out.println("result " + rs);
+
                     return true;
                 }
             } catch(Exception e){

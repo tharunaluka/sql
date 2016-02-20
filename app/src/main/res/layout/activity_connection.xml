@@ -34,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="192.168.0.103"
+                android:text="read-replica-2.c38hdpxf3l8j.ap-southeast-1.rds.amazonaws.com"
                 android:id="@+id/editHost"/>
 
         </LinearLayout>

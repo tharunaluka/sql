@@ -54,6 +54,8 @@ public class ConnectionActivity extends AppCompatActivity{
         editor.putString("connection_" + connections, hostText + "," + portText + "," + usernameText + "," + passwordText + "," + dbNameText + "," + nameText);
         editor.commit();
 
+        Toast .makeText(getApplicationContext(),"Connection Saved", Toast.LENGTH_SHORT).show();
+
 
     }
 
