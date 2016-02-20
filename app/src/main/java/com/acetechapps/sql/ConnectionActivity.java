@@ -4,7 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +20,7 @@ import com.acetechapps.sql.service.ActivityService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConnectionActivity extends AppCompatActivity implements ActivityService {
+public class ConnectionActivity extends AppCompatActivity  {
 
     EditText host;
     EditText port;
@@ -40,7 +46,6 @@ public class ConnectionActivity extends AppCompatActivity implements ActivitySer
         password = (EditText) findViewById(R.id.editPassword);
         name = (EditText) findViewById(R.id.editname);
         dbName = (EditText) findViewById(R.id.editdbName);
-
     }
 
     public void saveConnection(View clicked) {
@@ -70,6 +75,7 @@ public class ConnectionActivity extends AppCompatActivity implements ActivitySer
         String dbNameText = dbName.getText().toString();
         new ConnectAsyncTask().execute(hostText, portText,dbNameText, usernameText, passwordText );
     }
+
 
 
     public class ConnectAsyncTask extends AsyncTask<String, Integer, Boolean> {
@@ -106,9 +112,5 @@ public class ConnectionActivity extends AppCompatActivity implements ActivitySer
         }
     }
 
-    @Override
-    public void openDrawer(View view) {
-        Intent i= new Intent(this, LeftMenuActivity.class);
-        startActivity(i);
-    }
+
 }
