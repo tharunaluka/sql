@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 import com.acetechapps.sql.R;
 
-public class leftMenu extends AppCompatActivity
+public class LeftMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

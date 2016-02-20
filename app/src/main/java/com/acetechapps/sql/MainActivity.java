@@ -1,6 +1,5 @@
 package com.acetechapps.sql;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -12,12 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
+import com.acetechapps.sql.service.ActivityService;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ActivityService {
 
     EditText writtenQuery;
     String getQuery;
@@ -102,4 +102,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void openDrawer() {
+        Intent i= new Intent(this, LeftMenuActivity.class);
+        startActivity(i);
+    }
 }

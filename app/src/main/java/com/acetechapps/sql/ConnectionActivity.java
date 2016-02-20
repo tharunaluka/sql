@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.acetechapps.sql.service.ActivityService;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConnectionActivity extends AppCompatActivity{
+public class ConnectionActivity extends AppCompatActivity implements ActivityService {
 
     EditText host;
     EditText port;
@@ -103,5 +105,9 @@ public class ConnectionActivity extends AppCompatActivity{
         }
     }
 
-
+    @Override
+    public void openDrawer() {
+        Intent i= new Intent(this, LeftMenuActivity.class);
+        startActivity(i);
+    }
 }
