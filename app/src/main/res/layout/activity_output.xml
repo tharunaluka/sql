@@ -24,19 +24,32 @@
         android:background="#ffffff"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_below="@+id/appBarOutput">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ListView
+        <TableLayout
+            android:stretchColumns="0,1"
+            android:id="@+id/main_table"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+        </TableLayout>
+        </ScrollView>
+
+        <GridView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
             android:id="@+id/outPut">
 
-        </ListView>
-        </ScrollView>
+        </GridView>
+
 
     </LinearLayout>
 
@@ -48,6 +61,7 @@
         android:clickable="true"
         android:src="@drawable/ic_export"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:onClick="export"/>
 
 </RelativeLayout>

@@ -8,7 +8,10 @@
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="SQL"
-        android:id="@+id/textView6"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:textColor="#D4E157"
+        android:id="@+id/splashView"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
         android:gravity="center" />

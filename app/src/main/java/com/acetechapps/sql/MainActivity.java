@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     public void clear(View view) {
         getQuery = "Start Typing Query...";
-        writtenQuery.setText(getQuery, TextView.BufferType.EDITABLE);
+        writtenQuery.setHint(getQuery);
     }
 
     public void runQuery(View clicked) {
@@ -75,14 +75,22 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     }
 
     public void setViewAndDisplayResult(ResultSet rs) throws Exception{
-        setContentView(R.layout.activity_output);
-        String resultString = "Showing only the id of the result \n";
-        textView = (TextView) findViewById(R.id.testOutput);
-        while (rs.next()) {
-            resultString += rs.getString(1) + "\n";
-        }
-        textView.setText(resultString);
+        Utils.results = rs;
+        Intent i = new Intent(this, OutputActivity.class);
+        startActivity(i);
     }
+
+    public void openDrawer(){
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.openDrawer(GravityCompat.START);
+    }
+
+    public void menuClick(View view){
+        if(view.getId() == R.id.ic_drawer){
+            openDrawer();
+        }
+    }
+
 
     public class RunQueryTask extends AsyncTask<String, Integer, Boolean> {
 
@@ -103,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             }
             return false;
         }
-
 
         protected void onPostExecute(Boolean result) {
             if(result) {
@@ -152,20 +159,4 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             super.onBackPressed();
         }
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

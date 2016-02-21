@@ -18,7 +18,8 @@
             android:layout_marginBottom="16dp"
             android:id="@+id/ic_drawer"
             android:src="@drawable/ic_drawer"
-            android:onClick="openDrawer"/>
+            android:clickable="true"
+            android:onClick="menuClick"/>
 
         <TextView
             android:layout_width="wrap_content"
