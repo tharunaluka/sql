@@ -3,6 +3,7 @@ package com.acetechapps.sql;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -23,6 +25,8 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tharunaluka on 05/02/16.
@@ -43,23 +47,26 @@ public class OutputActivity extends AppCompatActivity implements View.OnClickLis
         ImageView backView = (ImageView) findViewById(R.id.ic_back);
         backView.setOnClickListener(this);
 
-        TableLayout tl = (TableLayout) findViewById(R.id.main_table);
 
         if(Utils.results != null){
 
-         //   ResultSet resultSet = Utils.results;
-         //   ResultSetMetaData rsmd = resultSet.getMetaData();
-         //   int columnsNumber = rsmd.getColumnCount();
-         //   while (resultSet.next()) {
-         //       for (int i = 1; i <= columnsNumber; i++) {
-         //           if (i > 1) System.out.print(",  ");
-         //           String columnValue = resultSet.getString(i);
-         //           tl.(columnValue + " " + rsmd.getColumnName(i));
-         //       }
-         //       System.out.println("");
-         //   }
-
-           Toast.makeText(getApplicationContext(), "is not null", Toast.LENGTH_SHORT).show();
+            ResultSet resultSet = Utils.results;
+            List<String> results=new ArrayList<>();
+            try {
+                int i=resultSet.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String result="";
+                    for(int j=1;j<=i;j++){
+                        result=result+" "+resultSet.getString(j);
+                    }
+                    results.add(result);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            TextView vi = (TextView) findViewById(R.id.outPut);
+            vi.setText(results.toString());
 
         }else{
             Toast.makeText(getApplicationContext(), "is null", Toast.LENGTH_SHORT).show();

@@ -31,26 +31,11 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-        <TableLayout
-            android:stretchColumns="0,1"
-            android:id="@+id/main_table"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-        </TableLayout>
+                <TextView
+                    android:id="@+id/outPut"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"/>
         </ScrollView>
-
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:id="@+id/outPut">
-
-        </GridView>
-
-
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
