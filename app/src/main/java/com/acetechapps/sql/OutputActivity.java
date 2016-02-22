@@ -49,31 +49,34 @@ public class OutputActivity extends AppCompatActivity implements View.OnClickLis
 
 
         if(Utils.results != null){
+            TableLayout ll = (TableLayout) findViewById(R.id.testOutput);
 
             ResultSet resultSet = Utils.results;
             String result="";
+            int k=0;
             try {
                 int i=resultSet.getMetaData().getColumnCount();
                 while (resultSet.next()){
+                    TableRow row= new TableRow(this);
+                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                    row.setLayoutParams(lp);
                     for(int j=1;j<=i;j++){
-                        result=result+" "+resultSet.getString(j);
+                        TextView textView = new TextView(this);
+                        textView.setText(resultSet.getString(j));
+                        row.addView(textView);
                     }
-                    result+= "\n";
+                    ll.addView(row, k++);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            TextView vi = (TextView) findViewById(R.id.outPut);
-            vi.setText(result);
+            //TextView vi = (TextView) findViewById(R.id.outPut);
+            //vi.setText(result);
         }else{
             Toast.makeText(getApplicationContext(), "is null", Toast.LENGTH_SHORT).show();
         }
 
     }
-
-
-
-
 
     public void export(View view) {
         Toast.makeText(getApplicationContext(), "Nothing to Export", Toast.LENGTH_SHORT).show();
