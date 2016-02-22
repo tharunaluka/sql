@@ -51,23 +51,20 @@ public class OutputActivity extends AppCompatActivity implements View.OnClickLis
         if(Utils.results != null){
 
             ResultSet resultSet = Utils.results;
-            List<String> results=new ArrayList<>();
+            String result="";
             try {
                 int i=resultSet.getMetaData().getColumnCount();
                 while (resultSet.next()){
-                    String result="";
                     for(int j=1;j<=i;j++){
                         result=result+" "+resultSet.getString(j);
                     }
-                    results.add(result);
+                    result+= "\n";
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
             TextView vi = (TextView) findViewById(R.id.outPut);
-            vi.setText(results.toString());
-
+            vi.setText(result);
         }else{
             Toast.makeText(getApplicationContext(), "is null", Toast.LENGTH_SHORT).show();
         }
