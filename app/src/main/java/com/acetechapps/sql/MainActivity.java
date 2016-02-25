@@ -23,7 +23,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     EditText writtenQuery;
     String getQuery;
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     }
 
 
+
     public class RunQueryTask extends AsyncTask<String, Integer, Boolean> {
 
         ResultSet rs;
@@ -133,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         if (id == R.id.nav_profile) {
             // Handle the camera action
         } else if (id == R.id.nav_queries) {
+            Intent intent = new Intent(this, QueryActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_tables) {
 
