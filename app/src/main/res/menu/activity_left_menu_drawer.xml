@@ -5,19 +5,22 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_account"
+            android:checked="false"
             android:title="My Profile"/>
         <item
             android:id="@+id/nav_queries"
             android:icon="@drawable/ic_queries"
-            android:checkable="true"
+            android:checked="false"
             android:title="Queries" />
         <item
             android:id="@+id/nav_tables"
             android:icon="@drawable/ic_tables"
+            android:checked="false"
             android:title="Tables" />
         <item
             android:id="@+id/nav_conneciton"
             android:icon="@drawable/ic_connection"
+            android:checked="false"
             android:title="Connection" />
         <item
             android:id="@+id/nav_share"
