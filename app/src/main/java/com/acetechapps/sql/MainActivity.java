@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        drawerLayout.closeDrawers();
+
         if (id == R.id.nav_profile) {
             // Handle the camera action
         } else if (id == R.id.nav_queries) {
