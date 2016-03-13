@@ -9,6 +9,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
@@ -44,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="start"
-                    android:text="select * from Jobdb_Emails limit 10"
+                    android:text="select * from Mdb_Emails limit 100;"
                     android:hint="Start typing the Query..." />
 
             </LinearLayout>

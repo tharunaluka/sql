@@ -134,18 +134,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawers();
 
         if (id == R.id.nav_profile) {
-            // Handle the camera action
+            Toast.makeText(this, "Profile Selected", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_queries) {
+            Toast.makeText(this, "Queries Selected", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, QueryActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_tables) {
 
+            Toast.makeText(this, "Tables Selected", Toast.LENGTH_SHORT).show();
+
         } else if (id == R.id.nav_conneciton) {
+
+            Toast.makeText(this, "Connection Selected", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_share) {
 
+            Toast.makeText(this, "Share Selected", Toast.LENGTH_SHORT).show();
+
         } else if (id == R.id.nav_about) {
+
+            Toast.makeText(this, "About Selected", Toast.LENGTH_SHORT).show();
 
         }
 

@@ -16,12 +16,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".ConnectionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.acetechapps.sql.MainActivity" />
         </activity>
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".OutputActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.acetechapps.sql.MainActivity" />
         </activity>
         <activity android:name=".QueryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.acetechapps.sql.MainActivity" />
         </activity>
     </application>
 
