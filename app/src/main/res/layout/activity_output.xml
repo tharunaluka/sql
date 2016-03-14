@@ -27,14 +27,15 @@
             android:layout_marginBottom="16dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-
             android:scrollbars="horizontal|vertical">
+
             <HorizontalScrollView
                 android:id="@+id/horizontalView"
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal|vertical"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="5dip">
+
             <TableLayout
                 android:id="@+id/testOutput"
                 android:layout_width="fill_parent"
@@ -42,7 +43,9 @@
                 android:padding="10dip"
                 android:isScrollContainer="true">
             </TableLayout>
+
             </HorizontalScrollView>
+
         </ScrollView>
     </LinearLayout>
 
