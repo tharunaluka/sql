@@ -56,6 +56,15 @@ public class OutputActivity extends AppCompatActivity implements View.OnClickLis
             int k=0;
             try {
                 int i=resultSet.getMetaData().getColumnCount();
+                ResultSetMetaData rsmd = resultSet.getMetaData();
+                TableRow header= new TableRow(this);
+                TableRow.LayoutParams headerLayoutparams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                header.setLayoutParams(headerLayoutparams);
+                for (int col = 1; col <= i; i++){
+                    TextView textView = new TextView(this);
+                    textView.setText(rsmd.getColumnName(col));
+                    header.addView(textView);
+                }
                 while (resultSet.next()){
                     TableRow row= new TableRow(this);
                     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);

@@ -21,7 +21,12 @@ import com.acetechapps.sql.service.ActivityService;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -104,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Statement stmt = connection.createStatement();
                     rs = stmt.executeQuery(params[0]);
                     System.out.println("result " + rs);
-
                     return true;
                 }
             } catch(Exception e){
