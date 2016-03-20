@@ -5,20 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.sql.SQLException;
-
 
 /**
  * Created by tharunaluka on 25/02/16.
@@ -31,35 +33,61 @@ public class QueryActivity extends AppCompatActivity {
     EditText queryName, queryText;
     Button saveQuery;
     ImageButton addQuery;
-    String[]  savedQueryArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queries);
+        showingQueries();
+    }
+
+    public void showingQueries() {
 
         sqlDB = new dbHelper(this);
-
         queryName = (EditText) findViewById(R.id.editQueryName);
         queryText = (EditText) findViewById(R.id.editQueryText);
         saveQuery = (Button) findViewById(R.id.saveQuery);
         addQuery = (ImageButton) findViewById(R.id.addAQuery);
 
         Cursor res = sqlDB.showAllQueries();
-        TableLayout tableLayout = (TableLayout) findViewById(R.id.allSavedQueries);
 
-        int j = 0;
         int queryRows = res.getColumnCount();
-        while (res.moveToNext()) {
-            TableRow row = new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);
-            for (int i = 1; i <= queryRows; i++) {
-                TextView textView = new TextView(this);
-                textView.setText(res.getString(j));
-                row.addView(textView);
+        int k = 0;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        if (Utils.results != null) {
+            TableLayout tb = (TableLayout) findViewById(R.id.allSavedQueries);
+            while (res.moveToNext()) {
+                TableRow row = new TableRow(this);
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                row.setLayoutParams(lp);
+                for (int j = 1; j < queryRows; j++) {
+                    TextView textView = new TextView(this);
+                    textView.setText(res.getString(j));
+                    textView.setPadding(8, 8, 8, 8);
+                    textView.setGravity(Gravity.LEFT);
+                    textView.setBackgroundColor(Color.parseColor("#D4E157"));
+                    textView.setTypeface(null, Typeface.BOLD);
+                    textView.setId(k);
+                    params.setMargins(0, 0, 0, 0);
+                    textView.setLayoutParams(params);
+                    row.addView(textView);
+                    tb.addView(row, k);
+
+                    TextView textViews = new TextView(this);
+                    textViews.setText(res.getString(j));
+                    textViews.setPadding(8, 8, 8, 8);
+                    textViews.setGravity(Gravity.LEFT);
+                    textViews.setBackgroundColor(Color.parseColor("#ffffff"));
+                    textViews.setId(k + 1);
+                    params.setMargins(0, 0, 0, 16);
+                    textViews.setLayoutParams(params);
+                    row.addView(textViews);
+                    tb.addView(row, k + 1);
+                }
+                k = k + 2;
             }
-            tableLayout.addView(row, j++);
+        }else{
+            Toast.makeText(getApplicationContext(), "No Queries Saved", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -68,16 +96,9 @@ public class QueryActivity extends AppCompatActivity {
     }
 
     public void saveQuery(View clicked){
-
-      //  boolean inserted =  sqlDB.insertData(queryName.getText().toString(),queryText.getText().toString());
-      //      if (inserted == true){
-       //         Toast.makeText(getApplicationContext(),"Data Inserted",Toast.LENGTH_SHORT).show();
-       //     }else{
-         //       Toast.makeText(getApplicationContext(),"Data not Inserted",Toast.LENGTH_SHORT).show();
-           // }
         queryName = (EditText) findViewById(R.id.editQueryName);
         queryText = (EditText) findViewById(R.id.editQueryText);
             sqlDB.insertData(queryName.getText().toString(),queryText.getText().toString());
             setContentView(R.layout.activity_queries);
-        }
     }
+}

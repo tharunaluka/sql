@@ -23,7 +23,6 @@
 
         <ScrollView
             android:background="#ffffff"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

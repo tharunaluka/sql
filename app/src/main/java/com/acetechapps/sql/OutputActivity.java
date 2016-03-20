@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,25 +54,38 @@ public class OutputActivity extends AppCompatActivity implements View.OnClickLis
             TableLayout ll = (TableLayout) findViewById(R.id.testOutput);
 
             ResultSet resultSet = Utils.results;
-            String result="";
             int k=0;
             try {
                 int i=resultSet.getMetaData().getColumnCount();
                 ResultSetMetaData rsmd = resultSet.getMetaData();
                 TableRow header= new TableRow(this);
-                TableRow.LayoutParams headerLayoutparams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                header.setLayoutParams(headerLayoutparams);
-                for (int col = 1; col <= i; i++){
-                    TextView textView = new TextView(this);
+                TableRow.LayoutParams headerLayoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                header.setLayoutParams(headerLayoutParams);
+                TextView textView = new TextView(this);
+                textView.setText("");
+                textView.setBackgroundColor(Color.parseColor("#D4E157"));
+                textView.setPadding(8,8,8,8);
+                header.addView(textView);
+                for (int col = 1; col <= i; col++){
+                    textView = new TextView(this);
+                    textView.setBackgroundColor(Color.parseColor("#D4E157"));
+                    textView.setPadding(8,8,8,8);
+                    textView.setTypeface(null, Typeface.BOLD);
                     textView.setText(rsmd.getColumnName(col));
                     header.addView(textView);
                 }
+                ll.addView(header, k++);
                 while (resultSet.next()){
                     TableRow row= new TableRow(this);
                     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                     row.setLayoutParams(lp);
+                    textView = new TextView(this);
+                    textView.setText(String.valueOf(k));
+                    textView.setPadding(8,8,8,8);
+                    textView.setGravity(Gravity.RIGHT);
+                    row.addView(textView);
                     for(int j=1;j<=i;j++){
-                        TextView textView = new TextView(this);
+                        textView = new TextView(this);
                         textView.setText(resultSet.getString(j));
                         row.addView(textView);
                     }
@@ -79,8 +94,6 @@ public class OutputActivity extends AppCompatActivity implements View.OnClickLis
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            //TextView vi = (TextView) findViewById(R.id.outPut);
-            //vi.setText(result);
         }else{
             Toast.makeText(getApplicationContext(), "is null", Toast.LENGTH_SHORT).show();
         }

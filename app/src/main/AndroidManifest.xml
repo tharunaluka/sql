@@ -32,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.acetechapps.sql.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>
