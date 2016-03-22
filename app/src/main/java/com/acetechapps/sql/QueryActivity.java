@@ -38,53 +38,46 @@ public class QueryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queries);
+        queryName = (EditText) findViewById(R.id.editQueryName);
+        queryText = (EditText) findViewById(R.id.editQueryText);
+        saveQuery = (Button) findViewById(R.id.saveQuery);
+        addQuery = (ImageButton) findViewById(R.id.addAQuery);
         showingQueries();
     }
 
     public void showingQueries() {
 
         sqlDB = new dbHelper(this);
-        queryName = (EditText) findViewById(R.id.editQueryName);
-        queryText = (EditText) findViewById(R.id.editQueryText);
-        saveQuery = (Button) findViewById(R.id.saveQuery);
-        addQuery = (ImageButton) findViewById(R.id.addAQuery);
 
         Cursor res = sqlDB.showAllQueries();
 
         int queryRows = res.getColumnCount();
         int k = 0;
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        if (Utils.results != null) {
+        if (res != null) {
             TableLayout tb = (TableLayout) findViewById(R.id.allSavedQueries);
             while (res.moveToNext()) {
                 TableRow row = new TableRow(this);
                 TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                 row.setLayoutParams(lp);
-                for (int j = 1; j < queryRows; j++) {
-                    TextView textView = new TextView(this);
-                    textView.setText(res.getString(j));
-                    textView.setPadding(8, 8, 8, 8);
-                    textView.setGravity(Gravity.LEFT);
-                    textView.setBackgroundColor(Color.parseColor("#D4E157"));
-                    textView.setTypeface(null, Typeface.BOLD);
-                    textView.setId(k);
-                    params.setMargins(0, 0, 0, 0);
-                    textView.setLayoutParams(params);
-                    row.addView(textView);
-                    tb.addView(row, k);
+                TextView textView = new TextView(this);
+                textView.setText(res.getString(1));
+                textView.setPadding(8, 8, 8, 8);
+                textView.setGravity(Gravity.LEFT);
+                textView.setBackgroundColor(Color.parseColor("#D4E157"));
+                textView.setTypeface(null, Typeface.BOLD);
+                //params.setMargins(0, 0, 0, 0);
+                row.addView(textView);
+                tb.addView(row, k++);
 
-                    TextView textViews = new TextView(this);
-                    textViews.setText(res.getString(j));
-                    textViews.setPadding(8, 8, 8, 8);
-                    textViews.setGravity(Gravity.LEFT);
-                    textViews.setBackgroundColor(Color.parseColor("#ffffff"));
-                    textViews.setId(k + 1);
-                    params.setMargins(0, 0, 0, 16);
-                    textViews.setLayoutParams(params);
-                    row.addView(textViews);
-                    tb.addView(row, k + 1);
-                }
-                k = k + 2;
+                row = new TableRow(this);
+                TextView textViews = new TextView(this);
+                textViews.setText(res.getString(2));
+                textViews.setPadding(8, 8, 8, 8);
+                textViews.setGravity(Gravity.LEFT);
+                textViews.setBackgroundColor(Color.parseColor("#ffffff"));
+                //params.setMargins(0, 0, 0, 16);
+                row.addView(textViews);
+                tb.addView(row, k++);
             }
         }else{
             Toast.makeText(getApplicationContext(), "No Queries Saved", Toast.LENGTH_SHORT).show();
@@ -100,5 +93,6 @@ public class QueryActivity extends AppCompatActivity {
         queryText = (EditText) findViewById(R.id.editQueryText);
             sqlDB.insertData(queryName.getText().toString(),queryText.getText().toString());
             setContentView(R.layout.activity_queries);
+        showingQueries();
     }
 }
