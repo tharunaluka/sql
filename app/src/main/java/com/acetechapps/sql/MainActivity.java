@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(result) {
                 try {
                     Utils.results = rs;
-                    startActivity(i);
+                    applicationContext.startActivity(i);
                 } catch (Exception e){
                     e.printStackTrace();
                 }
