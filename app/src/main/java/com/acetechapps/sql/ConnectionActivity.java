@@ -1,5 +1,6 @@
 package com.acetechapps.sql;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -73,12 +74,20 @@ public class ConnectionActivity extends AppCompatActivity  {
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
         String dbNameText = dbName.getText().toString();
-        new ConnectAsyncTask().execute(hostText, portText,dbNameText, usernameText, passwordText );
+        new ConnectAsyncTask(getApplicationContext(), true).execute(hostText, portText,dbNameText, usernameText, passwordText );
     }
 
 
 
     public class ConnectAsyncTask extends AsyncTask<String, Integer, Boolean> {
+
+        Context applicationContext;
+        boolean startMain = false;
+
+        public ConnectAsyncTask(Context context, boolean startMain){
+            this.applicationContext = context;
+            this.startMain = startMain;
+        }
 
         @Override
         protected Boolean doInBackground(String... params) {
@@ -104,11 +113,21 @@ public class ConnectionActivity extends AppCompatActivity  {
         protected void onPostExecute(Boolean result) {
             if(result) {
                 Toast.makeText(getApplicationContext(), "Connection SUCCESS, you can write queries now!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
-                startActivity(intent);
+                if(startMain) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             } else{
                 Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        public Context getApplicationContext() {
+            return applicationContext;
+        }
+
+        public void setApplicationContext(Context applicationContext) {
+            this.applicationContext = applicationContext;
         }
     }
 

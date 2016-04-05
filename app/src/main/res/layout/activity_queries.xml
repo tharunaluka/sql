@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_gravity="end|bottom"
-            android:onClick="addQuery">
+            android:onClick="addQuery"
+            android:src="@drawable/ic_add_query">
 
         </android.support.design.widget.FloatingActionButton>
     </FrameLayout>

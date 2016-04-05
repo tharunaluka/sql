@@ -2,6 +2,7 @@ package com.acetechapps.sql;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -22,6 +23,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.ResultSet;
+
 /**
  * Created by tharunaluka on 25/02/16.
  */
@@ -38,11 +41,13 @@ public class QueryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queries);
-        queryName = (EditText) findViewById(R.id.editQueryName);
-        queryText = (EditText) findViewById(R.id.editQueryText);
-        saveQuery = (Button) findViewById(R.id.saveQuery);
-        addQuery = (ImageButton) findViewById(R.id.addAQuery);
         showingQueries();
+    }
+
+    public void setViewAndDisplayResult(ResultSet rs) throws Exception{
+        Utils.results = rs;
+        Intent i = new Intent(this, OutputActivity.class);
+        startActivity(i);
     }
 
     public void showingQueries() {
@@ -50,33 +55,46 @@ public class QueryActivity extends AppCompatActivity {
         sqlDB = new dbHelper(this);
 
         Cursor res = sqlDB.showAllQueries();
-
-        int queryRows = res.getColumnCount();
         int k = 0;
         if (res != null) {
             TableLayout tb = (TableLayout) findViewById(R.id.allSavedQueries);
             while (res.moveToNext()) {
                 TableRow row = new TableRow(this);
-                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                row.setLayoutParams(lp);
+                TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.MATCH_PARENT);
+                row.setLayoutParams(params);
                 TextView textView = new TextView(this);
                 textView.setText(res.getString(1));
                 textView.setPadding(8, 8, 8, 8);
                 textView.setGravity(Gravity.LEFT);
                 textView.setBackgroundColor(Color.parseColor("#D4E157"));
                 textView.setTypeface(null, Typeface.BOLD);
-                //params.setMargins(0, 0, 0, 0);
                 row.addView(textView);
-                tb.addView(row, k++);
+                tb.addView(row,k++);
 
                 row = new TableRow(this);
+                params.setMargins(8, 8, 8, 16);
+                row.setLayoutParams(params);
                 TextView textViews = new TextView(this);
                 textViews.setText(res.getString(2));
                 textViews.setPadding(8, 8, 8, 8);
                 textViews.setGravity(Gravity.LEFT);
                 textViews.setBackgroundColor(Color.parseColor("#ffffff"));
-                //params.setMargins(0, 0, 0, 16);
+                textViews.setLayoutParams(params);
                 row.addView(textViews);
+
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String qryText = ((TextView)((ViewGroup)v).getChildAt(0)).getText().toString();
+                        if(Utils.connection==null) {
+                            Toast.makeText(getApplicationContext(), "No connection", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Intent intent = new Intent(QueryActivity.this, OutputActivity.class);
+                        MainActivity.RunQueryTask task = new MainActivity().new RunQueryTask(QueryActivity.this, intent);
+                        task.execute(qryText);
+                    }
+                });
                 tb.addView(row, k++);
             }
         }else{
@@ -92,7 +110,7 @@ public class QueryActivity extends AppCompatActivity {
         queryName = (EditText) findViewById(R.id.editQueryName);
         queryText = (EditText) findViewById(R.id.editQueryText);
             sqlDB.insertData(queryName.getText().toString(),queryText.getText().toString());
-            setContentView(R.layout.activity_queries);
+        setContentView(R.layout.activity_queries);
         showingQueries();
     }
 }

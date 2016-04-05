@@ -1,5 +1,7 @@
 package com.acetechapps.sql;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -49,9 +51,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(Utils.connection!=null){
             connection = Utils.connection;
-        } else {
-            //start connect activity again!
-            Toast.makeText(getApplicationContext(), "That's a bummer!", Toast.LENGTH_SHORT).show();
         }
         writtenQuery = (EditText) findViewById(R.id.inPut);
 
@@ -76,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void runQuery(View clicked) {
-        new RunQueryTask().execute(writtenQuery.getText().toString());
+        Intent i = new Intent(this, OutputActivity.class);
+        RunQueryTask task = new RunQueryTask(this, i);
+        task.execute(writtenQuery.getText().toString());
     }
 
     public void setViewAndDisplayResult(ResultSet rs) throws Exception{
@@ -101,15 +102,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public class RunQueryTask extends AsyncTask<String, Integer, Boolean> {
 
         ResultSet rs;
+        Context applicationContext;
+        Intent i;
+
+        RunQueryTask(Context applicationContext, Intent i){
+            this.applicationContext = applicationContext;
+            this.i = i;
+        }
 
         @Override
         protected Boolean doInBackground(String... params) {
             try {
-                if (connection != null) {
-                    Statement stmt = connection.createStatement();
+                if (Utils.connection != null) {
+                    connection = Utils.connection;
+                    Statement stmt = Utils.connection.createStatement();
                     rs = stmt.executeQuery(params[0]);
-                    System.out.println("result " + rs);
+                    System.out.println("query" +  params[0]);
                     return true;
+                } else {
+                    System.out.println("query -- no connection " +  params[0]);
                 }
             } catch(Exception e){
                 e.printStackTrace();
@@ -120,7 +131,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected void onPostExecute(Boolean result) {
             if(result) {
                 try {
-                    setViewAndDisplayResult(rs);
+                    Utils.results = rs;
+                    startActivity(i);
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -128,6 +140,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else{
                 Toast.makeText(getApplicationContext(), "Query failed", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        public void setApplicationContext(Context applicationContext) {
+            this.applicationContext = applicationContext;
+        }
+
+        public Context getApplicationContext() {
+            return applicationContext;
         }
     }
 
