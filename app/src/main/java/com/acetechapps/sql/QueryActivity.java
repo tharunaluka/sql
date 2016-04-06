@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.acetechapps.sql.db.DbHelper;
-import com.acetechapps.sql.dbHelper.DbHelper;
 
 import java.sql.ResultSet;
 
