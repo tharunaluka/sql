@@ -1,4 +1,4 @@
-package com.acetechapps.sql;
+package com.acetechapps.sql.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.acetechapps.sql.Utils;
 import com.acetechapps.sql.dbHelper.DbHelper;
 
 import java.sql.DriverManager;

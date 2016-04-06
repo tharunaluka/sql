@@ -1,4 +1,4 @@
-package com.acetechapps.sql;
+package com.acetechapps.sql.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,6 +17,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.acetechapps.sql.Utils;
 import com.acetechapps.sql.dbHelper.DbHelper;
 
 import java.sql.ResultSet;
