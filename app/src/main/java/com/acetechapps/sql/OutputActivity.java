@@ -1,4 +1,4 @@
-package com.acetechapps.sql.activity;
+package com.acetechapps.sql;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,8 +25,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
-
-import com.acetechapps.sql.Utils;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

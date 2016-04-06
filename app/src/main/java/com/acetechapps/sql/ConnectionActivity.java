@@ -1,7 +1,8 @@
-package com.acetechapps.sql.activity;
+package com.acetechapps.sql;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.acetechapps.sql.Utils;
 import com.acetechapps.sql.dbHelper.DbHelper;
 
 import java.sql.DriverManager;
@@ -44,11 +44,19 @@ public class ConnectionActivity extends AppCompatActivity  {
         String passwordText = password.getText().toString();
         String dbNameText = dbName.getText().toString();
         String nameText = name.getText().toString();
-        if(sqlDb.insertNewConnection(nameText, hostText, portText, usernameText, passwordText, dbNameText)) {
-            Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
-            new ConnectAsyncTask(this, true).execute(hostText, portText,dbNameText, usernameText, passwordText );
-        } else {
-            Toast.makeText(getApplicationContext(), "Connection was not saved", Toast.LENGTH_SHORT).show();
+        try{
+            if(sqlDb.insertNewConnection(nameText, hostText, portText, usernameText, passwordText, dbNameText)) {
+                Toast.makeText(getApplicationContext(), "Connection Saved", Toast.LENGTH_SHORT).show();
+                new ConnectAsyncTask(this, true).execute(hostText, portText, dbNameText, usernameText, passwordText);
+            } else {
+                Toast.makeText(getApplicationContext(), "Connection was not saved ", Toast.LENGTH_SHORT).show();
+            }
+        } catch (SQLException slqe){
+            if(slqe.getMessage().contains("2067")) {
+                Toast.makeText(getApplicationContext(), "Connection was not saved, given name is already used" , Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Connection was not saved - " + slqe.getMessage() , Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

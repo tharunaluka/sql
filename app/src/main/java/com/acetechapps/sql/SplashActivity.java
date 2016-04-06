@@ -1,4 +1,4 @@
-package com.acetechapps.sql.activity;
+package com.acetechapps.sql;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.acetechapps.sql.activity;
+package com.acetechapps.sql;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import com.acetechapps.sql.dbHelper.DbHelper;
 
 /**
  * Created by bhargavsarvepalli on 05/04/16.
+ *
  */
 public class ListConnectionsActivity extends Activity {
 
@@ -22,6 +23,8 @@ public class ListConnectionsActivity extends Activity {
         private RecyclerView.Adapter mAdapter;
         private RecyclerView.LayoutManager mLayoutManager;
         private DbHelper sqlDb;
+
+        Cursor myDataset;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +41,19 @@ public class ListConnectionsActivity extends Activity {
             mRecyclerView.setLayoutManager(mLayoutManager);
 
             sqlDb = new DbHelper(this);
-            Cursor myDataset = sqlDb.getAll();
-            if (!(myDataset.moveToFirst()) || myDataset.getCount() ==0){
-                Intent intent = new Intent(this, ConnectionActivity.class);
-                startActivity(intent);
-                finish();
-            }
+            getDataSet();
             mAdapter = new MyAdapter(myDataset);
             mRecyclerView.setAdapter(mAdapter);
         }
 
+    void getDataSet(){
+        myDataset = sqlDb.getAll();
+        if (!(myDataset.moveToFirst()) || myDataset.getCount() ==0){
+            Intent intent = new Intent(this, ConnectionActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
         private Cursor mDataset;
@@ -56,8 +62,8 @@ public class ListConnectionsActivity extends Activity {
         // Provide a suitable constructor (depends on the kind of dataset)
         public MyAdapter(Cursor myDataset) {
             mDataset = myDataset;
-            mDataset.moveToNext();
-            count = mDataset.getCount();
+            mDataset.moveToFirst();
+            count = mDataset.getCount() == 0 ? 0 : mDataset.getCount();
         }
 
         // Create new views (invoked by the layout manager)
@@ -83,7 +89,7 @@ public class ListConnectionsActivity extends Activity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            mDataset.move(position - 1);
+            mDataset.moveToPosition(position);
             holder.mTextView.setText(mDataset.getString(0));
             holder.mTextView2.setText(mDataset.getString(1));
         }
@@ -122,4 +128,16 @@ public class ListConnectionsActivity extends Activity {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataSet();
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+    public void addConnection(View v){
+        Intent intent = new Intent(this, ConnectionActivity.class);
+        startActivity(intent);
+    }
 }
