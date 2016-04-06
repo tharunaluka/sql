@@ -1,4 +1,4 @@
-package com.acetechapps.sql;
+package com.acetechapps.sql.db;
 
 import android.content.ContentValues;
 import android.content.Context;
