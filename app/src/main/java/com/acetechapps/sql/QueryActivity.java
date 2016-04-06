@@ -1,27 +1,23 @@
 package com.acetechapps.sql;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.acetechapps.sql.dbHelper.DbHelper;
 
 import java.sql.ResultSet;
 
@@ -32,7 +28,7 @@ import java.sql.ResultSet;
 
 public class QueryActivity extends AppCompatActivity {
 
-    dbHelper sqlDB;
+    DbHelper sqlDB;
     EditText queryName, queryText;
     Button saveQuery;
     ImageButton addQuery;
@@ -52,7 +48,7 @@ public class QueryActivity extends AppCompatActivity {
 
     public void showingQueries() {
 
-        sqlDB = new dbHelper(this);
+        sqlDB = new DbHelper(this);
 
         Cursor res = sqlDB.showAllQueries();
         int k = 0;
@@ -69,7 +65,7 @@ public class QueryActivity extends AppCompatActivity {
                 textView.setBackgroundColor(Color.parseColor("#D4E157"));
                 textView.setTypeface(null, Typeface.BOLD);
                 row.addView(textView);
-                tb.addView(row,k++);
+                tb.addView(row, k++);
 
                 row = new TableRow(this);
                 params.setMargins(8, 8, 8, 16);
@@ -85,8 +81,8 @@ public class QueryActivity extends AppCompatActivity {
                 row.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String qryText = ((TextView)((ViewGroup)v).getChildAt(0)).getText().toString();
-                        if(Utils.connection==null) {
+                        String qryText = ((TextView) ((ViewGroup) v).getChildAt(0)).getText().toString();
+                        if (Utils.connection == null) {
                             Toast.makeText(getApplicationContext(), "No connection", Toast.LENGTH_SHORT).show();
                             return;
                         }
