@@ -1,9 +1,7 @@
 package com.acetechapps.sql;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,32 +9,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
-
-import com.acetechapps.sql.service.ActivityService;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     EditText writtenQuery;
     String getQuery;
-    SharedPreferences preferences;
     Connection connection;
-    TextView textView;
 
     private Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -171,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_conneciton) {
 
             Toast.makeText(this, "Connection Selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ListConnectionsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 

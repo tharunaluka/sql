@@ -30,9 +30,6 @@ public class QueryActivity extends AppCompatActivity {
 
     DbHelper sqlDB;
     EditText queryName, queryText;
-    Button saveQuery;
-    ImageButton addQuery;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

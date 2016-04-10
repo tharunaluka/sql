@@ -66,10 +66,8 @@ public class ConnectionActivity extends AppCompatActivity  {
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
         String dbNameText = dbName.getText().toString();
-        new ConnectAsyncTask(getApplicationContext(), true).execute(hostText, portText,dbNameText, usernameText, passwordText );
+        new ConnectAsyncTask(getApplicationContext(), true).execute(hostText, portText, dbNameText, usernameText, passwordText);
     }
-
-
 
     public static class ConnectAsyncTask extends AsyncTask<String, Integer, Boolean> {
 

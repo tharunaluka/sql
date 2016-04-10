@@ -14,7 +14,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static final String dbName = "sqlDB";
     public static final String queryTableName = "queryTable";
-    public static final String connectionsTableName = "connections";
+    public static final String connectionsTableName = "connectionsTable";
     public static final String Column1 = "queryID";
     public static final String Column2 = "queryTitle";
     public static final String Column3 = "queryQuery";
@@ -87,9 +87,9 @@ public class DbHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Cursor getAll() {
+    public Cursor getAllConnections() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT name, db_name FROM "+connectionsTableName,null);
+        Cursor res = db.rawQuery("SELECT * FROM "+connectionsTableName,null);
         return res;
     }
 
