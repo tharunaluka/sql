@@ -157,7 +157,8 @@ public class ListConnectionsActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-            Cursor cursor = sqlDb.getConnectionByName(((TextView) v.findViewById(R.id.connection_item_name)).getText().toString());
+            String name = ((TextView) v.findViewById(R.id.connection_item_name)).getText().toString().replaceAll(".*\\.\\s+","");
+            Cursor cursor = sqlDb.getConnectionByName(name);
             cursor.moveToNext();
             cursor.moveToFirst();
             ConnectionActivity.ConnectAsyncTask asyncTask = new ConnectionActivity.ConnectAsyncTask(ListConnectionsActivity.this, true);
