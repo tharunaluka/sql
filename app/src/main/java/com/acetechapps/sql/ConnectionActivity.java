@@ -138,8 +138,8 @@ public class ConnectionActivity extends AppCompatActivity  {
                 Toast.makeText(getApplicationContext(), "Connection SUCCESS, you can write queries now!", Toast.LENGTH_SHORT).show();
                 if(startMain) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     applicationContext.startActivity(intent);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
             } else{
                 Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
