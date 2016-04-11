@@ -3,10 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
-        <item name="colorAccent">#9E9D24</item>
+        <item name="colorAccent">#D4E157</item>
     </style>
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#9E9D24</item>
+        <item name="colorPrimary">#D4E157</item>
         <item name="colorPrimaryDark">#827717</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
