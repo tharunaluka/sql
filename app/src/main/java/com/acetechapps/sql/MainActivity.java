@@ -6,9 +6,11 @@ import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -23,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText writtenQuery;
     String getQuery;
     Connection connection;
-
-    private Toolbar toolbar;
     DrawerLayout drawerLayout;
 
     @Override
@@ -32,8 +32,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.appBar);
-        setSupportActionBar(toolbar);
+        // Initiating other App Toolbar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.mainActivityToolbar);
+        setSupportActionBar(myToolbar);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
         if(Utils.connection!=null){
             connection = Utils.connection;
@@ -49,6 +54,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    // Inflate the other appbar menu; also adds items to the action bar if present.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appbar_other_menu, menu);
+        return true;
+    }
+
+    //Other appbar onClickListener
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.otherAppbarSettings:
+                Toast.makeText(getApplicationContext(),"No Settings Found",Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void save(View clicked) {

@@ -8,10 +8,12 @@ import java.sql.Statement;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,21 +35,20 @@ import java.util.List;
 /**
  * Created by tharunaluka on 05/02/16.
  */
-public class OutputActivity extends AppCompatActivity implements View.OnClickListener {
-
-
-
-    private Toolbar toolbar;
+public class OutputActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_output);
 
-        toolbar = (Toolbar) findViewById(R.id.appBarOutput);
-        setSupportActionBar(toolbar);
-        ImageView backView = (ImageView) findViewById(R.id.ic_back);
-        backView.setOnClickListener(this);
+        // Initiating other App Toolbar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.outputActivityToolbar);
+        setSupportActionBar(myToolbar);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
 
         if(Utils.results != null){
@@ -100,18 +101,27 @@ public class OutputActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    // Inflate the other appbar menu; also adds items to the action bar if present.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appbar_other_menu, menu);
+        return true;
+    }
+
+    //Other appbar onClickListener
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.otherAppbarSettings:
+                Toast.makeText(getApplicationContext(),"No Settings Found",Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public void export(View view) {
         Toast.makeText(getApplicationContext(), "Nothing to Export", Toast.LENGTH_SHORT).show();
-    }
-
-    public void goBack() {
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.ic_back) {
-            goBack();
-        }
     }
 }
